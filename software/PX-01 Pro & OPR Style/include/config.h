@@ -2,6 +2,7 @@
 #define CONFIG_H
 
 #include <Arduino.h>
+
 #include <motors.h>
 #include <pinout.h>
 
@@ -32,7 +33,7 @@
  * Después de este tiempo, el robot se detendrá automáticamente.
  * 
  */
-#define TEST_DURATION_MS 5000
+#define TEST_DURATION_MS 2000 //5000
 
 /**
  * @brief Define el tiempo de espera entre ejecuciones del bucle de control en microsegundos.

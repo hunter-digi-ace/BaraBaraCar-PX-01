@@ -1,21 +1,8 @@
 #ifndef UTILS_H
 #define UTILS_H
 
-#include <Adafruit_NeoPixel.h>
 #include <Arduino.h>
 #include <pinout.h>
-
-enum LEDS {
-  RGB_LEFT = 2,
-  RGB_TOP = 1,
-  RGB_RIGHT = 0
-};
-
-void set_led(enum LEDS led, int r, int g, int b);
-void clear_led(enum LEDS led);
-
-void blink_led(enum LEDS led, int r, int g, int b, int ms);
-void rainbow_led(enum LEDS led);
 
 /**
  * @brief Definición de los posibles estados del botón

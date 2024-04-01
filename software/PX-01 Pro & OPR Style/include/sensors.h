@@ -2,9 +2,11 @@
 #define SENSORS_H
 
 #include <Arduino.h>
+
 #include <config.h>
 #include <pinout.h>
 #include <utils.h>
+#include <leds.h>
 
 /**
  * @brief Cantidad de sensores.
@@ -18,7 +20,6 @@
  */
 #define SENSORS_MAX 4095
 #define SENSORS_MIN 0
-
 
 /**
  * @brief Valor máximo de la posición sobre la línea.

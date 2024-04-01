@@ -95,15 +95,11 @@ static void print_calibrations() {
  *
  */
 void calibrate_sensors() {
-  set_led(RGB_LEFT, 80, 20, 0);
-  set_led(RGB_TOP, 80, 20, 0);
-  set_led(RGB_RIGHT, 80, 20, 0);
+  set_leds(80, 20, 0);
   while (get_btn_pressed_state() != BTN_PRESSED) {
     blink_led(RGB_TOP, 80, 20, 0, 350);
   }
-  clear_led(RGB_LEFT);
-  clear_led(RGB_TOP);
-  clear_led(RGB_RIGHT);
+  clear_leds();
   int calibration_start_ms = millis();
   int count_ok = 0;
   do {
@@ -125,9 +121,7 @@ void calibrate_sensors() {
   } while (millis() - calibration_start_ms < SENSORS_CALIBRATION_MS);
   print_calibrations();
 
-  clear_led(RGB_LEFT);
-  clear_led(RGB_TOP);
-  clear_led(RGB_RIGHT);
+  clear_leds();
   if (count_ok == SENSORS_COUNT) {
     set_led(RGB_TOP, 0, 50, 0);
     delay(1000);

@@ -3,6 +3,52 @@
 static int8_t menu_index = 0;
 
 /**
+ * @brief Menú principal despues de calibrar sensores.
+ *
+ */
+void main_menu(){
+  while (!is_race_started()) {
+    BTN_STATES btn_state = get_btn_pressed_state();
+    if (btn_state == BTN_PRESSING && get_btn_pressing_ms() >= 250) {
+      clear_leds();
+      while (btn_state == BTN_PRESSING) {
+        blink_leds(0, 0, 50, 125);
+        btn_state = get_btn_pressed_state();
+      }
+    } else {
+      handle_menu(btn_state);
+    }
+
+    if (btn_state == BTN_LONG_PRESSED) {
+      set_leds(0, 0, 50);
+      long starting_ms = millis();
+      while (millis() < (starting_ms + get_ms_start())) {
+        if (get_ms_start() > 3000 && millis() - starting_ms < get_ms_start() - 3000) {
+          blink_leds(0, 0, 50, 500);
+        } else {
+          if (millis() - starting_ms < get_ms_start() - 2000) {
+            set_leds(0, 0, 50);
+          } else if (millis() - starting_ms < get_ms_start() - 1000) {
+            set_led(RGB_RIGHT, 0, 0, 50);
+            set_led(RGB_LEFT, 0, 0, 50);
+            clear_led(RGB_TOP);
+          } else {
+            set_led(RGB_TOP, 0, 0, 50);
+            clear_led(RGB_LEFT);
+            clear_led(RGB_RIGHT);
+            if (get_base_fan_speed() != 0) {
+              set_fan_speed(get_base_fan_speed() * 0.85f);
+            }
+          }
+        }
+      }
+      clear_leds();
+      set_race_started(true);
+    }
+  }
+}
+
+/**
  * @brief En función de la selección del menú, establece la velocidad de motores y ventilador y la aceleración del robot.
  * Además, muestra el LED RGB correspondiente.
  *
