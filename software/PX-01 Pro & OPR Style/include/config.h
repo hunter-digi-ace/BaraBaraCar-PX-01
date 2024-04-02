@@ -33,7 +33,7 @@
  * Después de este tiempo, el robot se detendrá automáticamente.
  * 
  */
-#define TEST_DURATION_MS 2000 //5000
+#define TEST_DURATION_MS 10000 //5000
 
 /**
  * @brief Define el tiempo de espera entre ejecuciones del bucle de control en microsegundos.
@@ -54,15 +54,15 @@
  */
 #define MENU_1_BASE_SPEED 20
 #define MENU_1_ACCEL_SPEED 60
-#define MENU_1_BASE_FAN_SPEED 85
+#define MENU_1_BASE_FAN_SPEED 0 //85
 
 #define MENU_2_BASE_SPEED 35
 #define MENU_2_ACCEL_SPEED 60
-#define MENU_2_BASE_FAN_SPEED 85
+#define MENU_2_BASE_FAN_SPEED 0 //85
 
 #define MENU_3_BASE_SPEED 50
 #define MENU_3_ACCEL_SPEED 60
-#define MENU_3_BASE_FAN_SPEED 85
+#define MENU_3_BASE_FAN_SPEED 0 //85
 
 /**
  * @brief Constantes del controlador PID.
