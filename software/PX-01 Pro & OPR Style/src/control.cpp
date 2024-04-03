@@ -116,15 +116,20 @@ void control_loop() {
       set_race_started(false);
     } else {
 
-      if (speed < base_speed) {
-        speed = base_accel_speed * (race_started_ms / 1000.0f);
-      } else if (speed > base_speed) {
-        speed = base_speed;
-      }
+      if(race_started_ms < 1000.0f){
+        speed = STARTING_SPEED;
+        //set_motors_speed(STARTING_SPEED, STARTING_SPEED);
+      } else{
+        if (speed < base_speed) {
+          speed = base_accel_speed * (race_started_ms / 2000.0f);
+        } else if (speed > base_speed) {
+          speed = base_speed;
+        }
 
-      set_motors_speed(speed + correction, speed - correction);
-      if (base_fan_speed > 0) {
-        set_fan_speed(base_fan_speed);
+        set_motors_speed(speed + correction, speed - correction);
+        if (base_fan_speed > 0) {
+          set_fan_speed(base_fan_speed);
+        }
       }
     }
     last_control_loop_us = micros();

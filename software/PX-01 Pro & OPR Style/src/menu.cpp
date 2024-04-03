@@ -12,7 +12,7 @@ void main_menu(){
     if (btn_state == BTN_PRESSING && get_btn_pressing_ms() >= 250) {
       clear_leds();
       while (btn_state == BTN_PRESSING) {
-        blink_leds(0, 0, 50, 125);
+        blink_leds(95, 0, 160, 125);
         btn_state = get_btn_pressed_state();
       }
     } else {
@@ -20,20 +20,20 @@ void main_menu(){
     }
 
     if (btn_state == BTN_LONG_PRESSED) {
-      set_leds(0, 0, 50);
+      set_leds(95, 0, 160);
       long starting_ms = millis();
       while (millis() < (starting_ms + get_ms_start())) {
         if (get_ms_start() > 3000 && millis() - starting_ms < get_ms_start() - 3000) {
-          blink_leds(0, 0, 50, 500);
+          blink_leds(95, 0, 160, 500);
         } else {
           if (millis() - starting_ms < get_ms_start() - 2000) {
-            set_leds(0, 0, 50);
+            set_leds(95, 0, 160);
           } else if (millis() - starting_ms < get_ms_start() - 1000) {
-            set_led(RGB_RIGHT, 0, 0, 50);
-            set_led(RGB_LEFT, 0, 0, 50);
+            set_led(RGB_RIGHT, 95, 0, 160);
+            set_led(RGB_LEFT, 95, 0, 160);
             clear_led(RGB_TOP);
           } else {
-            set_led(RGB_TOP, 0, 0, 50);
+            set_led(RGB_TOP, 95, 0, 160);
             clear_led(RGB_LEFT);
             clear_led(RGB_RIGHT);
             if (get_base_fan_speed() != 0) {
@@ -56,7 +56,7 @@ void main_menu(){
 static void handle_menu_index() {
   switch (menu_index) {
     case 0:
-      set_led(RGB_LEFT, 0, 0, 50);
+      set_led(RGB_LEFT, 95, 0, 160);
       clear_led(RGB_TOP);
       clear_led(RGB_RIGHT);
       set_base_speed(MENU_1_BASE_SPEED);
@@ -65,7 +65,7 @@ static void handle_menu_index() {
       break;
     case 1:
       clear_led(RGB_LEFT);
-      set_led(RGB_TOP, 0, 0, 50);
+      set_led(RGB_TOP, 95, 0, 160);
       clear_led(RGB_RIGHT);
       set_base_speed(MENU_2_BASE_SPEED);
       set_base_accel_speed(MENU_2_ACCEL_SPEED);
@@ -74,7 +74,7 @@ static void handle_menu_index() {
     case 2:
       clear_led(RGB_LEFT);
       clear_led(RGB_TOP);
-      set_led(RGB_RIGHT, 0, 0, 50);
+      set_led(RGB_RIGHT, 95, 0, 160);
       set_base_speed(MENU_3_BASE_SPEED);
       set_base_accel_speed(MENU_3_ACCEL_SPEED);
       set_base_fan_speed(MENU_3_BASE_FAN_SPEED);
