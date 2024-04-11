@@ -33,8 +33,10 @@ static float calc_correction(int error) {
  * @param started Indica si la carrera ha comenzado.
  */
 void set_race_started(bool started) {
+  speed = 0;
   race_started = started;
   if (started) {
+    speed = 0;
     race_started_ms = millis();
   }else{
     race_stopped_ms = millis();
@@ -115,21 +117,15 @@ void control_loop() {
       set_fan_speed(0);
       set_race_started(false);
     } else {
+      if (speed < base_speed) {
+        speed = /*8 +*/ (base_accel_speed * ((millis() - race_started_ms) / 1000.0f));
+      } else if (speed > base_speed) {
+        speed = base_speed;
+      }
 
-      if(race_started_ms < 1000.0f){
-        speed = STARTING_SPEED;
-        //set_motors_speed(STARTING_SPEED, STARTING_SPEED);
-      } else{
-        if (speed < base_speed) {
-          speed = base_accel_speed * (race_started_ms / 2000.0f);
-        } else if (speed > base_speed) {
-          speed = base_speed;
-        }
-
-        set_motors_speed(speed + correction, speed - correction);
-        if (base_fan_speed > 0) {
-          set_fan_speed(base_fan_speed);
-        }
+      set_motors_speed(speed + correction, speed - correction);
+      if (base_fan_speed > 0) {
+        set_fan_speed(base_fan_speed);
       }
     }
     last_control_loop_us = micros();

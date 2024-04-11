@@ -10,8 +10,8 @@
  * @brief Indica el modo de funcionamiento del robot.
  *
  */
-#define MODE_TEST 1
-// #define MODE_RACE 2
+//#define MODE_TEST 1
+#define MODE_RACE 2
 
 /**
  * @brief Indica si la línea a seguir es blanca o negra.
@@ -54,24 +54,24 @@
  */
 #define STARTING_SPEED 5
 
-#define MENU_1_BASE_SPEED 25
-#define MENU_1_ACCEL_SPEED 15
-#define MENU_1_BASE_FAN_SPEED 0 //85
+#define MENU_1_BASE_SPEED 40
+#define MENU_1_ACCEL_SPEED 30
+#define MENU_1_BASE_FAN_SPEED 75
 
-#define MENU_2_BASE_SPEED 35
-#define MENU_2_ACCEL_SPEED 20
-#define MENU_2_BASE_FAN_SPEED 0 //85
+#define MENU_2_BASE_SPEED 45
+#define MENU_2_ACCEL_SPEED 30
+#define MENU_2_BASE_FAN_SPEED 80
 
 #define MENU_3_BASE_SPEED 50
-#define MENU_3_ACCEL_SPEED 35
-#define MENU_3_BASE_FAN_SPEED 0 //85
+#define MENU_3_ACCEL_SPEED 30
+#define MENU_3_BASE_FAN_SPEED 95
 
 /**
  * @brief Constantes del controlador PID.
  *
  */
-#define PID_KP 0.2
-#define PID_KD 0.80
+#define PID_KP 0.2 //
+#define PID_KD 0.8//0.80 //
 
 void init_components();
 long get_ms_start();

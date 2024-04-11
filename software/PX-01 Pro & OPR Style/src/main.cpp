@@ -17,11 +17,11 @@ void setup() {
 
 void loop() {
   //modo test, para que pare despues de TEST_DURATION_MS millis
-  if ((millis() - get_race_started_ms()) >= TEST_DURATION_MS) {
-    set_fan_speed(0);
-    set_motors_speed(0, 0);
-    set_race_started(false);
-  }else{
-    control_loop();
-  }
+  //if ((millis() - get_race_started_ms()) >= TEST_DURATION_MS) {
+  //  set_fan_speed(0);
+  //  set_motors_speed(0, 0);
+  //  set_race_started(false);
+  //}else{
+  control_loop();
+  //}
 }
