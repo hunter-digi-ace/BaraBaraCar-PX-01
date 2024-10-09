@@ -1,4 +1,4 @@
-#include <menu.h>
+#include "menu.h"
 
 static int8_t menu_index = 0;
 
@@ -19,7 +19,8 @@ void main_menu(){
       handle_menu(btn_state);
     }
 
-    if (btn_state == BTN_LONG_PRESSED) {
+    if ((btn_state == BTN_LONG_PRESSED) || is_race_starting()) {
+      set_race_starting(true);
       set_leds(95, 0, 160);
       long starting_ms = millis();
       while (millis() < (starting_ms + get_ms_start())) {
@@ -79,6 +80,15 @@ static void handle_menu_index() {
       set_base_accel_speed(MENU_3_ACCEL_SPEED);
       set_base_fan_speed(MENU_3_BASE_FAN_SPEED);
       break;
+    case 3:
+      clear_led(RGB_LEFT);
+      clear_led(RGB_TOP);
+      set_led(RGB_RIGHT, 95, 0, 160);
+      set_led(RGB_TOP, 95, 0, 160);
+      set_base_speed(MENU_4_BASE_SPEED);
+      set_base_accel_speed(MENU_4_ACCEL_SPEED);
+      set_base_fan_speed(MENU_4_BASE_FAN_SPEED);
+      break;
   }
 }
 
@@ -89,7 +99,7 @@ static void handle_menu_index() {
  */
 void handle_menu(BTN_STATES btn_state) {
   if (btn_state == BTN_PRESSED) {
-    menu_index = (menu_index + 1) % 3;
+    menu_index = (menu_index + 1) % 4;
   }
   handle_menu_index();
 }

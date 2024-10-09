@@ -2,7 +2,7 @@
 #define UTILS_H
 
 #include <Arduino.h>
-#include <pinout.h>
+#include "pinout.h"
 
 /**
  * @brief Definición de los posibles estados del botón

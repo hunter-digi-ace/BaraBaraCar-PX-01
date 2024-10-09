@@ -1,10 +1,10 @@
 #include <Arduino.h>
 
-#include <config.h>
-#include <control.h>
-#include <menu.h>
-#include <pinout.h>
-#include <sensors.h>
+#include "config.h"
+#include "control.h"
+#include "menu.h"
+#include "pinout.h"
+#include "sensors.h"
 
 bool race_started = false;
 long race_started_ms = 0;
@@ -22,6 +22,12 @@ void loop() {
   //  set_motors_speed(0, 0);
   //  set_race_started(false);
   //}else{
-  control_loop();
+  if (!is_race_starting()) {
+    set_fan_speed(0);
+    set_motors_speed(0, 0);
+    set_race_started(false);
+  }else{
+    control_loop();
+  }
   //}
 }

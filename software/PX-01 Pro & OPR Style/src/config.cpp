@@ -1,4 +1,4 @@
-#include <config.h>
+#include "config.h"
 
 /**
  * @brief Inicializa los componentes del robot.
@@ -26,6 +26,9 @@ void init_components() {
   digitalWrite(MOTOR_LEFT_A, HIGH);
   digitalWrite(MOTOR_LEFT_B, HIGH);
 
+  pinMode(MOD_START, INPUT);
+  attachInterrupt(digitalPinToInterrupt(MOD_START), rc5_isr, CHANGE);
+  
   pinMode(MOTOR_SUCTION, OUTPUT);
 
   init_motors();

@@ -3,8 +3,9 @@
 
 #include <Arduino.h>
 
-#include <motors.h>
-#include <pinout.h>
+#include "motors.h"
+#include "pinout.h"
+#include "rc5.h"
 
 /**
  * @brief Indica el modo de funcionamiento del robot.
@@ -56,22 +57,26 @@
 
 #define MENU_1_BASE_SPEED 40
 #define MENU_1_ACCEL_SPEED 30
-#define MENU_1_BASE_FAN_SPEED 75
+#define MENU_1_BASE_FAN_SPEED 40
 
 #define MENU_2_BASE_SPEED 45
 #define MENU_2_ACCEL_SPEED 30
-#define MENU_2_BASE_FAN_SPEED 80
+#define MENU_2_BASE_FAN_SPEED 50
 
 #define MENU_3_BASE_SPEED 50
 #define MENU_3_ACCEL_SPEED 30
-#define MENU_3_BASE_FAN_SPEED 95
+#define MENU_3_BASE_FAN_SPEED 60
+
+#define MENU_4_BASE_SPEED 55
+#define MENU_4_ACCEL_SPEED 30
+#define MENU_4_BASE_FAN_SPEED 65
 
 /**
  * @brief Constantes del controlador PID.
  *
  */
-#define PID_KP 0.2 //
-#define PID_KD 0.8//0.80 //
+#define PID_KP 0.2 // 0.2
+#define PID_KD 2.5//0.80 //1.5 //2
 
 void init_components();
 long get_ms_start();

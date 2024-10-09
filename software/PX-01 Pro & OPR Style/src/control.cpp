@@ -1,4 +1,4 @@
-#include <control.h>
+#include "control.h"
 
 static long last_control_loop_us = 0;
 static int position = 0;
@@ -10,6 +10,7 @@ static int base_fan_speed = 0;
 
 static int speed = 0;
 
+static bool race_starting = false;
 static bool race_started = false;
 static long race_started_ms = 0;
 static long race_stopped_ms = 0;
@@ -25,6 +26,25 @@ static float calc_correction(int error) {
   float d = PID_KD * (error - last_error);
   last_error = error;
   return p + d;
+}
+
+/**
+ * @brief Establece el estado de iniciando carrera.
+ *
+ * @param starting Indica si la carrera está iniciando.
+ */
+void set_race_starting(bool starting) {
+  race_starting = starting;
+}
+
+/**
+ * @brief Comprueba si la carrera está iniciando.
+ *
+ * @return true Iniciando.
+ * @return false En espera o iniciada.
+ */
+bool is_race_starting() {
+  return race_starting;
 }
 
 /**

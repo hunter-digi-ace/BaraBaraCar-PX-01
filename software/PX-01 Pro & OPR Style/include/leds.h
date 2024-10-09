@@ -2,8 +2,8 @@
 #define LEDS_H
 
 #include <Arduino.h>
-#include <config.h>
-#include <pinout.h>
+#include "config.h"
+#include "pinout.h"
 #include <Adafruit_NeoPixel.h>
 
 enum LEDS {
