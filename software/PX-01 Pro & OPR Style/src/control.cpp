@@ -142,10 +142,20 @@ void control_loop() {
       } else if (speed > base_speed) {
         speed = base_speed;
       }
-
-      set_motors_speed(speed + correction, speed - correction);
-      if (base_fan_speed > 0) {
-        set_fan_speed(base_fan_speed);
+      if(qre1113FrontalBlanco()){
+        set_led(RGB_LEFT, 95, 0, 160);
+        set_led(RGB_RIGHT, 95, 0, 160);
+        set_motors_speed((speed-10) + correction, (speed-10) - correction);
+        if (base_fan_speed > 0) {
+          set_fan_speed(base_fan_speed+10);
+        }
+      }else{
+        clear_led(RGB_LEFT);
+        clear_led(RGB_RIGHT);
+        set_motors_speed(speed + correction, speed - correction);
+        if (base_fan_speed > 0) {
+          set_fan_speed(base_fan_speed);
+        }
       }
     }
     last_control_loop_us = micros();

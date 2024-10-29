@@ -13,6 +13,8 @@ void setup() {
   init_components();
   calibrate_sensors();
   main_menu();
+  
+  pinMode(BTN_1, INPUT);
 }
 
 void loop() {
@@ -22,6 +24,8 @@ void loop() {
   //  set_motors_speed(0, 0);
   //  set_race_started(false);
   //}else{
+
+  
   if (!is_race_starting()) {
     set_fan_speed(0);
     set_motors_speed(0, 0);
@@ -29,5 +33,17 @@ void loop() {
   }else{
     control_loop();
   }
+
+  
   //}
+
+
+/*
+  if (!is_race_starting()) {
+    clear_leds();
+  }else{
+    set_leds(0,200,50);
+    Serial.println(digitalRead(BTN_1));
+  }*/
+
 }

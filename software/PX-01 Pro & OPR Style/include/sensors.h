@@ -34,4 +34,8 @@ int get_sensor_calibrated(int sensor);
 int get_sensor_position(int last_position);
 long get_last_line_detected_ms();
 
+
+bool filtrarSensorFrontal();
+bool qre1113FrontalBlanco();
+
 #endif // SENSORS_H
