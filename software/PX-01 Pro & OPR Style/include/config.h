@@ -64,12 +64,16 @@
 #define MENU_2_BASE_FAN_SPEED 50
 
 #define MENU_3_BASE_SPEED 50
-#define MENU_3_ACCEL_SPEED 30
+#define MENU_3_ACCEL_SPEED 35
 #define MENU_3_BASE_FAN_SPEED 60
 
 #define MENU_4_BASE_SPEED 55
-#define MENU_4_ACCEL_SPEED 30
-#define MENU_4_BASE_FAN_SPEED 65
+#define MENU_4_ACCEL_SPEED 40
+#define MENU_4_BASE_FAN_SPEED 70
+
+#define MENU_5_BASE_SPEED 65
+#define MENU_5_ACCEL_SPEED 45
+#define MENU_5_BASE_FAN_SPEED 75
 
 /**
  * @brief Constantes del controlador PID.

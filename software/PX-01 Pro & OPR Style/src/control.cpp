@@ -8,12 +8,19 @@ static int base_speed = 0;
 static int base_accel_speed = 0;
 static int base_fan_speed = 0;
 
+static int curve_speed = 0;
+static int curve_fan_speed = 0;
+
 static int speed = 0;
 
 static bool race_starting = false;
 static bool race_started = false;
 static long race_started_ms = 0;
+static long last_turn_ms = 0;
 static long race_stopped_ms = 0;
+
+static bool curve_entry = false;
+static bool first_accel = true;
 
 /**
  * @brief Realiza el cálculo de la corrección del controlador PID en función del error respecto a la posición de la línea.
@@ -58,6 +65,7 @@ void set_race_started(bool started) {
   if (started) {
     speed = 0;
     race_started_ms = millis();
+    last_turn_ms = millis();
   }else{
     race_stopped_ms = millis();
   }
@@ -94,6 +102,7 @@ long get_race_stopped_ms() {
  */
 void set_base_speed(int speed) {
   base_speed = speed;
+  curve_speed = speed * 7/10;
 }
 
 /**
@@ -112,6 +121,7 @@ void set_base_accel_speed(int accel_speed) {
  */
 void set_base_fan_speed(int fan_speed) {
   base_fan_speed = fan_speed;
+  curve_fan_speed = fan_speed *12/10;
 }
 
 /**
@@ -137,21 +147,35 @@ void control_loop() {
       set_fan_speed(0);
       set_race_started(false);
     } else {
-      if (speed < base_speed) {
-        speed = /*8 +*/ (base_accel_speed * ((millis() - race_started_ms) / 1000.0f));
-      } else if (speed > base_speed) {
-        speed = base_speed;
+      if(first_accel) {
+        if (speed < base_speed) {
+          speed = /*8 +*/ (base_accel_speed * ((millis() - race_started_ms) / 1000.0f));
+        } else if (speed > base_speed) {
+          speed = base_speed;
+          first_accel = false;
+        }
+      }else{
+        if (speed < base_speed) {
+          speed = curve_speed + (base_accel_speed * ((millis() - race_started_ms) / 1000.0f));
+        } else if (speed > base_speed) {
+          speed = base_speed;
+        }
       }
-      if(qre1113FrontalBlanco()){
+      if(!qre1113FrontalBlanco()){
         set_led(RGB_LEFT, 95, 0, 160);
         set_led(RGB_RIGHT, 95, 0, 160);
-        set_motors_speed((speed-10) + correction, (speed-10) - correction);
+        set_motors_speed((curve_speed) + correction, (curve_speed) - correction);
         if (base_fan_speed > 0) {
-          set_fan_speed(base_fan_speed+10);
+          set_fan_speed(curve_fan_speed);
+        }
+        if(curve_entry){
+          last_turn_ms = millis();
+          curve_entry = false;
         }
       }else{
         clear_led(RGB_LEFT);
         clear_led(RGB_RIGHT);
+        curve_entry = true;
         set_motors_speed(speed + correction, speed - correction);
         if (base_fan_speed > 0) {
           set_fan_speed(base_fan_speed);

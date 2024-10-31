@@ -89,6 +89,15 @@ static void handle_menu_index() {
       set_base_accel_speed(MENU_4_ACCEL_SPEED);
       set_base_fan_speed(MENU_4_BASE_FAN_SPEED);
       break;
+    case 4:
+      clear_led(RGB_RIGHT);
+      clear_led(RGB_TOP);
+      set_led(RGB_RIGHT, 95, 0, 160);
+      set_led(RGB_LEFT, 95, 0, 160);
+      set_base_speed(MENU_5_BASE_SPEED);
+      set_base_accel_speed(MENU_5_ACCEL_SPEED);
+      set_base_fan_speed(MENU_5_BASE_FAN_SPEED);
+      break;
   }
 }
 
@@ -99,7 +108,7 @@ static void handle_menu_index() {
  */
 void handle_menu(BTN_STATES btn_state) {
   if (btn_state == BTN_PRESSED) {
-    menu_index = (menu_index + 1) % 4;
+    menu_index = (menu_index + 1) % 5;
   }
   handle_menu_index();
 }
