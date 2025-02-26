@@ -161,6 +161,7 @@ void control_loop() {
           speed = base_speed;
         }
       }
+      /*
       if(!qre1113FrontalBlanco()){
         set_led(RGB_LEFT, 95, 0, 160);
         set_led(RGB_RIGHT, 95, 0, 160);
@@ -180,7 +181,12 @@ void control_loop() {
         if (base_fan_speed > 0) {
           set_fan_speed(base_fan_speed);
         }
+      }*/
+      set_motors_speed(speed + correction, speed - correction);
+      if (base_fan_speed > 0) {
+        set_fan_speed(base_fan_speed);
       }
+      /////
     }
     last_control_loop_us = micros();
   }

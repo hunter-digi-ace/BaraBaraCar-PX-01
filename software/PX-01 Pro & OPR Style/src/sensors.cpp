@@ -171,7 +171,7 @@ int get_sensor_calibrated(int sensor) {
  * @return int Posición del robot en la pista
  */
 int get_sensor_position(int last_position) {
-  filtrarSensorFrontal();
+  //filtrarSensorFrontal();
   long sum_sensors_weight = 0;
   long sum_sensors = 0;
   int count_sensors_detecting = 0;
@@ -205,23 +205,23 @@ int get_sensor_position(int last_position) {
 long get_last_line_detected_ms() {
   return last_line_detected_ms;
 }
-
+/*
 const int MAGNITUD_FILTRO_SUELO = 10;
 
 int lecturas[MAGNITUD_FILTRO_SUELO] = {0};
 int indice = 0;
 int total = 0;
-
-bool filtrarSensorFrontal(){
+*/
+/*bool filtrarSensorFrontal(){
     total -= lecturas[indice];
     lecturas[indice] = digitalRead(BTN_1);
     total += digitalRead(BTN_1);
     indice = (indice + 1) % MAGNITUD_FILTRO_SUELO;
     double promedio2 = total / (double)MAGNITUD_FILTRO_SUELO;
     return (promedio2 > 0.7) ? true : false;
-}
+}*/
 
 
-bool qre1113FrontalBlanco(){
+/*bool qre1113FrontalBlanco(){
     return filtrarSensorFrontal();
-}
+}*/

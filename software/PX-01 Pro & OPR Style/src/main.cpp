@@ -14,7 +14,7 @@ void setup() {
   calibrate_sensors();
   main_menu();
   
-  pinMode(BTN_1, INPUT);
+  //pinMode(BTN_1, INPUT);
 }
 
 void loop() {
